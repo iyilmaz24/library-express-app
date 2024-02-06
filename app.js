@@ -3,6 +3,17 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const mongoose = require("mongoose");
+
+
+mongoose.set("strictQuery", false);
+const mongoDB = "mongodb://127.0.0.1:27017/librarydb?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.0.1";
+
+async function main() {
+  await mongoose.connect(mongoDB);
+};
+main().catch((err) => console.log(err));
+
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -42,3 +53,5 @@ module.exports = app;
 
 
 // http://localhost:3000/
+
+
